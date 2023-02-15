@@ -62,7 +62,7 @@ for x = xlo:xhi
 %       counter s by 1.
         for i = -((P-1)/2):((P-1)/2)
             for j = -((Q-1)/2):((Q-1)/2)
-                if ~(f(x+i, y+j)/255)*sel(i+1+((P-1)/2), j+1+((P-1)/2))==1
+                if ~(f(x+i, y+j)/255)*sel(i+1+((P-1)/2), j+1+((Q-1)/2))==1
                     s = s + 1;
                 end
             end
