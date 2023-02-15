@@ -20,4 +20,10 @@
 function [out] = thin(f, A, B)
 
 f_hm = hm_transform(f, A, B);
+f_hm = uint8(invert(f_hm));
+
+imtool(f_hm)
+sum(f_hm/255, 'all')
+sum(f/255, 'all')
+
 out = f - f_hm;
