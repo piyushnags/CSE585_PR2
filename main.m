@@ -28,6 +28,8 @@ imtool(im3)
 
 [L, num_c] = bwlabel(im3);
 
+% Get connected components from
+% match1
 c1 = 255*(L == 1);
 c2 = 255*(L == 2);
 c3 = 255*(L == 3);
@@ -38,5 +40,19 @@ c4 = 255*(L == 4);
 % imtool(c3)
 % imtool(c4)
 
+% Make 3x3 Structuring Element
+% and generate size distribution
 B = ones(3,3);
-sd = size_dist(c1, B);
+sd1 = size_dist(c1, B);
+sd2 = size_dist(c2, B);
+sd3 = size_dist(c3, B);
+sd4 = size_dist(c4, B);
+
+% Get pecstrum from size distribution
+pec1 = pecstrum(sd1);
+pec2 = pecstrum(sd2);
+pec3 = pecstrum(sd3);
+pec4 = pecstrum(sd4);
+
+% Get shape complexities for objects
+sh = shape_complexity(pec);
