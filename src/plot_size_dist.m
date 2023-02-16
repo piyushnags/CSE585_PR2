@@ -1,3 +1,23 @@
+%--------------------------------------------------------------------------
+% Module: plot_size_dist.m
+% Usage: plot_size_dist(size_dist, fname)
+% Purpose: Plot the size distribution
+%
+% Input Variables:
+%   size_dist   Size distribution of a image as 2d array
+%   fname       File name for saving
+%
+% Returned Results:
+%   None
+%
+% Processing Flow:
+%   1. Plot the size distribution as step funcion
+%   2. Save as given file
+%
+% Author: Piyush Nagasubramaniam, Siyuan Hong, Jacky Lin
+% Date: 02/15/2023
+%--------------------------------------------------------------------------
+
 function plot_size_dist(size_dist, fname)
     figure()
     st = 0;

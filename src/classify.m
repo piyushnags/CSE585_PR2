@@ -1,3 +1,28 @@
+%--------------------------------------------------------------------------
+% Module: classify.m
+% Usage: classify(input, target)
+% Purpose: Match the images in input to the images in the target
+%
+% Input Variables:
+%   input      File name for input image
+%   target     File name for target image
+%
+% Returned Results:
+%   None
+%
+% Processing Flow:
+%   1. Calculating the pattern spectrum for each connected component in the
+%   target graph.
+%   2. Calculating the pattern spectrum for each connected component in the
+%   input graph.
+%   3. Determine the difference between the input pattern spectrum and
+%   target spectrum.
+%   4. The minimum MSE of two spectrum will be return as the correct match
+%
+% Author: Piyush Nagasubramaniam, Siyuan Hong, Jacky Lin
+% Date: 02/15/2023
+%--------------------------------------------------------------------------
+
 function classify(input, target)
 im3 = imread(target);
 im3 = round(255*im3);
