@@ -2,9 +2,9 @@ clear;
 addpath('imgs/','src/')
 %% Homotopic Skeletonization
 % Read image 1: Penn256
-im1 = imread("penn256.gif");
+im1 = imread("bear.gif");
 im1 = round(im1*255);
-imtool(im1)
+% imtool(im1)
 
 % Homotopic Skeletonization
 load('elem.mat');
@@ -22,7 +22,7 @@ while ~isequal(im1_, next)
 end
 
 imshow(im1_)
-saveas(gcf,'psuSk.png')
+saveas(gcf,'bearSk.png')
 %% Size Distribution, Spectrum and Complexity
 im3 = imread('match1.gif');
 im3 = round(255*im3);
@@ -41,16 +41,16 @@ for i = 1:num_ref_cls
     % and generate size distribution
     sd = size_dist(c, B);
     % Plot the size distribution
-    plot_size_dist(sd, ['Input',num2str(i),'SizeDist.png']);
+%     plot_size_dist(sd, ['Input',num2str(i),'SizeDist.png']);
     % Get pecstrum from size distribution
     pec = pecstrum(sd);
     % Plot the spectrum
-    figure()
-    bar(pec(1,:), pec(2,:))
-    xlabel('r')
-    ylabel('f(r)')
-    saveas(gcf,['Input',num2str(i),'Pecstrum.png'])
-    close all
+%     figure()
+%     bar(pec(1,:), pec(2,:))
+%     xlabel('r')
+%     ylabel('f(r)')
+%     saveas(gcf,['Input',num2str(i),'Pecstrum.png'])
+%     close all
     % Get shape complexities for objects
     sh = shape_complexity(pec);
     fprintf('Input %d has a shape complexity of %.4f.\n',i,sh);
