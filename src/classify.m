@@ -3,20 +3,18 @@ im3 = imread(target);
 im3 = round(255*im3);
 
 [L, num_ref_cls] = bwlabel(im3);
+% Make 3x3 Structuring Element
 B = ones(3,3);
 ref = {};
 for i = 1:num_ref_cls
     % Get connected components from
     c = 255*(L == i);
-    % Make 3x3 Structuring Element
-    % and generate size distribution
+    % Generate size distribution
     sd = size_dist(c, B);
     % Get pecstrum from size distribution
     pec = pecstrum(sd);
     ref{i} = pec(2,:);
 end 
-
-% plot_size_dist(sd1);
 
 % Read match3
 im4 = imread(input);
@@ -27,31 +25,32 @@ im4 = round(255*im4);
 for i = 1:num_c
     % Get connected components from
     c = 255*(L == i);
-    % Make 3x3 Structuring Element
-    % and generate size distribution
+    % Generate size distribution
     sd = size_dist(c, B);
     % Get pecstrum from size distribution
     pec = pecstrum(sd);
+    se_size = pec(1,:);
     pec = pec(2,:);
+    weight = flip(se_size(1,:)).^2;
+    % Find the best match image
     score = Inf;
     class = 0;
     for y = 1:num_ref_cls
+        % Current reference image to compare
         cur_ref = ref{y};
+        % Match the spectrum size
         max_size = max(size(pec, 2), size(cur_ref, 2));
-        
         pec(end+1:max_size+1) = 0;
         cur_ref(end+1:max_size+1) = 0;
-
-%         weight = pec(1,:)/max(pec(1,:));
-%         weight(end+1:max_size+1) = 1;
-        weight = ones('like', pec);
+        weight(end+1:max_size+1) = 0;
+        % Calculate the difference using MSE
         tmp = sqrt(sum(weight.*(pec - cur_ref).^2, 'all'));
+        % Record the smaller score representing the smallest difference
         if tmp < score
             score = tmp;
             class = y;
         end
     end
-    i
-    class
+    fprintf('Input %d matches %d.\n',i,class);
 end 
 end
