@@ -37,7 +37,6 @@ ref = {};
 for i = 1:num_ref_cls
     % Get connected components from
     c = 255*(L == i);
-    imtool(c)
     % Make 3x3 Structuring Element
     % and generate size distribution
     sd = size_dist(c, B);
@@ -61,7 +60,7 @@ end
 
 
 
-%%
+%% Classifying Rotated Shapes using Pecstral Analysis
 % Read match3
 im4 = imread('match3.gif');
 im4 = round(255*im4);
@@ -112,8 +111,8 @@ for i = 1:num_c
     elseif class == 4
         class = 3;
     end
-    fprintf('Input %d matches %d.\n',i,class);
+    fprintf('Ground Truth Object: %d Predicted Object %d.\n',i,class);
 end 
 
-%%
-classify('shadow1.gif', 'shadow1rotated.gif')
+%% Classifying Shapes in Rotated Charlie Brown Image
+classify('shadow1rotated.gif', 'shadow1.gif')
