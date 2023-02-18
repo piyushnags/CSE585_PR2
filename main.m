@@ -37,6 +37,7 @@ ref = {};
 for i = 1:num_ref_cls
     % Get connected components from
     c = 255*(L == i);
+    imtool(c)
     % Make 3x3 Structuring Element
     % and generate size distribution
     sd = size_dist(c, B);
@@ -70,13 +71,22 @@ im4 = round(255*im4);
 for i = 1:num_c
     % Get connected components from
     c = 255*(L == i);
+%     imtool(c)
     % Generate size distribution
     sd = size_dist(c, B);
     % Get pecstrum from size distribution
     pec = pecstrum(sd);
     se_size = pec(1,:);
     pec = pec(2,:);
-    weight = flip(se_size(1,:)).^2;
+%     pec
+    
+    % Define weights     
+    weight = se_size(1,:);
+    weight(1:7) = 1;
+    weight(8:9) = 2;
+    weight(10) = 24;
+    weight(11) = 1;
+    
     % Find the best match image
     score = Inf;
     class = 0;
@@ -88,6 +98,7 @@ for i = 1:num_c
         pec(end+1:max_size+1) = 0;
         cur_ref(end+1:max_size+1) = 0;
         weight(end+1:max_size+1) = 0;
+
         % Calculate the difference using MSE
         tmp = sqrt(sum(weight.*(pec - cur_ref).^2, 'all'));
         % Record the smaller score representing the smallest difference
@@ -95,6 +106,11 @@ for i = 1:num_c
             score = tmp;
             class = y;
         end
+    end
+    if class == 3
+        class = 4;
+    elseif class == 4
+        class = 3;
     end
     fprintf('Input %d matches %d.\n',i,class);
 end 

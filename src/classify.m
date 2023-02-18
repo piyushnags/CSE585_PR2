@@ -77,5 +77,6 @@ for i = 1:num_c
         end
     end
     fprintf('Input %d matches %d.\n',i,class);
-end 
+end
+fprintf('--------------------------------------------------------------\n')
 end
