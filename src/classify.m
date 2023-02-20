@@ -8,7 +8,7 @@
 %   target     File name for target image
 %
 % Returned Results:
-%   None
+%   None, prints predictions to console
 %
 % Processing Flow:
 %   1. Calculating the pattern spectrum for each connected component in the

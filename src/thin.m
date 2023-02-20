@@ -1,7 +1,7 @@
 %--------------------------------------------------------------------------
 % Module: thin.m
 % Usage: thin(f, A, B)
-% Purpose: Homotopy preserving skeletonization
+% Purpose: Morphological thinning
 %
 % Input Variables:
 %   f       input image array
@@ -12,7 +12,8 @@
 %   out     output image array
 %
 % Processing Flow:
-%   
+%   1. Perform hit/miss transform on the inverted input
+%   2. subtract the inverted output from the input
 %
 % Author: Piyush Nagasubramaniam, Siyuan Hong, Jacky Lin
 % Date: 02/15/2023
